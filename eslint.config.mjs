@@ -33,6 +33,9 @@ export default withNuxt(antfu({
     "perfectionist/sort-imports": ["error", {
 
     }],
+    "vue/block-order": ["error", {
+      order: ["template", "script", "style"],
+    }],
     "unicorn/filename-case": ["error", {
       case: "kebabCase",
       ignore: ["README.md"],

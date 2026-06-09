@@ -5,6 +5,7 @@
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
         Home
       </NuxtLink>
+      <ColorToggle />
     </div>
     <div class="navbar-end">
       <a href="" class="btn">SIGN IN </a>
