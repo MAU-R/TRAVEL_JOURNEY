@@ -1,7 +1,7 @@
-// @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
-import antfu from '@antfu/eslint-config'
+import antfu from "@antfu/eslint-config";
 
+// @ts-check
+import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt(antfu({
   type: "app",
@@ -31,7 +31,7 @@ export default withNuxt(antfu({
     "node/prefer-global/process": ["off"],
     "node/no-process-env": ["error"],
     "perfectionist/sort-imports": ["error", {
-      
+
     }],
     "unicorn/filename-case": ["error", {
       case: "kebabCase",

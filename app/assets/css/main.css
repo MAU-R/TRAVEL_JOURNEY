@@ -1,7 +1,6 @@
 /*./app/assets/css/main.css*/
 
-
 @import "tailwindcss";
-@plugin "daisyui"{
-    themes: light --default
-};
+@plugin "daisyui" {
+  themes: light --default;
+}

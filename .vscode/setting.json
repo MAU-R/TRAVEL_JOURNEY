@@ -3,7 +3,6 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
@@ -12,7 +11,6 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-
 
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off", "fixable": true },
@@ -26,7 +24,6 @@
     { "rule": "*quotes", "severity": "off", "fixable": true },
     { "rule": "*semi", "severity": "off", "fixable": true }
   ],
-
 
   "eslint.validate": [
     "javascript",
