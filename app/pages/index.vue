@@ -10,8 +10,19 @@
         <p class="py-6">
           lets see what ur up to, and where you been these days, shall we
         </p>
-        <AuthButton />
+        <AuthButton v-if="!authStore.user" />
+        <NuxtLink
+          v-else
+          to="/dashboard"
+          class="btn btn-primary"
+        >
+          Start app
+        </NuxtLink>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+const authStore = useAuthStore();
+</script>
