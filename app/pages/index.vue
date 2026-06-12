@@ -10,9 +10,7 @@
         <p class="py-6">
           lets see what ur up to, and where you been these days, shall we
         </p>
-        <button class="btn btn-primary">
-          Get Started <Icon name="" />
-        </button>
+        <AuthButton />
       </div>
     </div>
   </div>

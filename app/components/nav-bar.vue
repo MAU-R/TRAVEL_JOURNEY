@@ -10,5 +10,6 @@
     <div class="navbar-end">
       <a href="" class="btn">SIGN IN </a>
     </div>
+    <AuthButton />
   </div>
 </template>
