@@ -19,10 +19,13 @@
     "@tailwindcss/vite": "^4.3.0",
     "better-auth": "^1.6.15",
     "drizzle-orm": "^0.45.2",
+    "drizzle-zod": "^0.8.3",
     "eslint": "^10.4.1",
     "nuxt": "^4.4.7",
+    "nuxt-csurf": "^1.6.5",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.3.0",
+    "vee-validate": "^5.0.0-beta.0",
     "vue": "^3.5.35",
     "vue-router": "^5.1.0",
     "zod": "^4.4.3"

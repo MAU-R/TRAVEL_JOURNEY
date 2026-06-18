@@ -41,7 +41,10 @@
         />
       </div>
     </div>
-    <div class="flex-1" />
+    <!-- Here is how the nested routing is done -->
+    <div class="flex-1">
+      <NuxtPage />
+    </div>
   </div>
 </template>
 
