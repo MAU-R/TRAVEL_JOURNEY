@@ -2,10 +2,10 @@
 -- Better Auth + Drizzle (SQLite/Turso)
 */
 
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text, int } from "drizzle-orm/sqlite-core";
 
 export const user = sqliteTable("user", {
-  id: text("id").primaryKey(),
+  id: int().primaryKey(),
 
   name: text("name").notNull(),
 
@@ -47,7 +47,7 @@ export const session = sqliteTable("session", {
 
   userAgent: text("user_agent"),
 
-  userId: text("user_id")
+  userId: int("user_id")
     .notNull()
     .references(() => user.id, {
       onDelete: "cascade",
@@ -61,7 +61,7 @@ export const account = sqliteTable("account", {
 
   providerId: text("provider_id").notNull(),
 
-  userId: text("user_id")
+  userId: int("user_id")
     .notNull()
     .references(() => user.id, {
       onDelete: "cascade",

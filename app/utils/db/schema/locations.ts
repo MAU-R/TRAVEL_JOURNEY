@@ -1,7 +1,8 @@
 /* app / utils / db / schema / locations.ts */
-import { int, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { int, real, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+
 import { user } from "./auth";
 
 export const location = sqliteTable("location", {
@@ -14,7 +15,9 @@ export const location = sqliteTable("location", {
   userId: int().notNull().references(() => user.id),
   createdAt: int().notNull().$default(() => Date.now()),
   updatedAt: int().notNull().$default(() => Date.now()).$onUpdate(() => Date.now()),
-});
+}, t => [
+  unique().on(t.name, t.userId),
+]);
 
 export const InsertLocation = createInsertSchema(location, {
   name: field => field.min(1).max(100),
@@ -28,3 +31,5 @@ export const InsertLocation = createInsertSchema(location, {
   slug: true,
   id: true,
 });
+
+export type InsertLocation = z.infer<typeof InsertLocation>;
