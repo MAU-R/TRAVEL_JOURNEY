@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "976cd5ee-646e-4d30-81e5-a9fe16faebdd",
+  "id": "21decc1a-447d-4106-9438-5847f6c1ee93",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "location": {
@@ -286,7 +286,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -429,7 +429,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -468,7 +468,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false
@@ -565,14 +565,14 @@
           "name": "created_at",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         }
       },

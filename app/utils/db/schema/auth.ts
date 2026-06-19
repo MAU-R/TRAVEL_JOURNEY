@@ -1,115 +1,51 @@
-/* app/utils/db/schema/auth.ts
--- Better Auth + Drizzle (SQLite/Turso)
-*/
-
-import { integer, sqliteTable, text, int } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const user = sqliteTable("user", {
-  id: int().primaryKey(),
-
-  name: text("name").notNull(),
-
-  email: text("email").notNull().unique(),
-
-  emailVerified: integer("email_verified", {
-    mode: "boolean",
-  }).notNull(),
-
-  image: text("image"),
-
-  createdAt: integer("created_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  updatedAt: integer("updated_at", {
-    mode: "timestamp",
-  }).notNull(),
+  id: text().primaryKey(),
+  name: text().notNull(),
+  email: text().notNull().unique(),
+  emailVerified: integer({ mode: "boolean" }).notNull(),
+  image: text(),
+  createdAt: integer().notNull(),
+  updatedAt: integer().notNull(),
 });
 
 export const session = sqliteTable("session", {
-  id: text("id").primaryKey(),
-
-  expiresAt: integer("expires_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  token: text("token").notNull().unique(),
-
-  createdAt: integer("created_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  updatedAt: integer("updated_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  ipAddress: text("ip_address"),
-
-  userAgent: text("user_agent"),
-
-  userId: int("user_id")
+  id: text().primaryKey(),
+  expiresAt: integer().notNull(),
+  token: text().notNull().unique(),
+  createdAt: integer().notNull(),
+  updatedAt: integer().notNull(),
+  ipAddress: text(),
+  userAgent: text(),
+  userId: text()
     .notNull()
-    .references(() => user.id, {
-      onDelete: "cascade",
-    }),
+    .references(() => user.id, { onDelete: "cascade" }),
 });
 
 export const account = sqliteTable("account", {
-  id: text("id").primaryKey(),
-
-  accountId: text("account_id").notNull(),
-
-  providerId: text("provider_id").notNull(),
-
-  userId: int("user_id")
+  id: text().primaryKey(),
+  accountId: text().notNull(),
+  providerId: text().notNull(),
+  userId: text()
     .notNull()
-    .references(() => user.id, {
-      onDelete: "cascade",
-    }),
-
-  accessToken: text("access_token"),
-
-  refreshToken: text("refresh_token"),
-
-  idToken: text("id_token"),
-
-  accessTokenExpiresAt: integer("access_token_expires_at", {
-    mode: "timestamp",
-  }),
-
-  refreshTokenExpiresAt: integer("refresh_token_expires_at", {
-    mode: "timestamp",
-  }),
-
-  scope: text("scope"),
-
-  password: text("password"),
-
-  createdAt: integer("created_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  updatedAt: integer("updated_at", {
-    mode: "timestamp",
-  }).notNull(),
+    .references(() => user.id, { onDelete: "cascade" }),
+  accessToken: text(),
+  refreshToken: text(),
+  idToken: text(),
+  accessTokenExpiresAt: integer(),
+  refreshTokenExpiresAt: integer(),
+  scope: text(),
+  password: text(),
+  createdAt: integer().notNull(),
+  updatedAt: integer().notNull(),
 });
 
 export const verification = sqliteTable("verification", {
-  id: text("id").primaryKey(),
-
-  identifier: text("identifier").notNull(),
-
-  value: text("value").notNull(),
-
-  expiresAt: integer("expires_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  createdAt: integer("created_at", {
-    mode: "timestamp",
-  }).notNull(),
-
-  updatedAt: integer("updated_at", {
-    mode: "timestamp",
-  }).notNull(),
+  id: text().primaryKey(),
+  identifier: text().notNull(),
+  value: text().notNull(),
+  expiresAt: integer().notNull(),
+  createdAt: integer(),
+  updatedAt: integer(),
 });
