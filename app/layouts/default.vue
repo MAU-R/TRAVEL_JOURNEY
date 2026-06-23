@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div class="flex fmin-h-screen flex-col">
+  <div class="flex min-h-screen flex-col">
     <NavBar />
     <main
       class="flex-1 flex flex-col"

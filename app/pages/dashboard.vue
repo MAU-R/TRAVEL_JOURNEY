@@ -1,7 +1,7 @@
 <!-- /app/pages/dashboard.vue -->
 
 <template>
-  <div class="flex-1 flex">
+  <div class="flex-1 flex h-full">
     <div class="bg-base-100 transition-all duration-300" :class="{ 'w-64': isSidebarOpen, 'w-16': !isSidebarOpen }">
       <div
         class="flex hover:cursor-pointer hover:bg-base-200 p-2"
@@ -55,8 +55,11 @@
         />
       </div>
     </div>
-    <div class="flex-1">
-      <NuxtPage />
+    <div class="flex-1 overflow-auto">
+      <div class="flex flex-col size-full">
+        <NuxtPage />
+        <Map class="flex-1" />
+      </div>
     </div>
   </div>
 </template>
