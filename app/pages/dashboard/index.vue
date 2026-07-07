@@ -12,7 +12,13 @@
       <div
         v-for="location in locations"
         :key="location.id"
-        class="card card-compact bg-base-300 h-40 w-72 shrink-0"
+        class="card card-compact bg-base-300 h-40 border-2 w-72 mb-2 shrink-0 hover:cursor-pointer"
+        :class="{
+          'border-accent': location.id === mapStore.selectedPoint?.id,
+          'border-transparent': location !== mapStore.selectedPoint,
+        }"
+        @mouseenter="mapStore.selectedPoint = location"
+        @mouseleave="mapStore.selectedPoint = null"
       >
         <div class="card-body">
           <h3 class="text-xl">
@@ -35,7 +41,7 @@
 <script lang="ts" setup>
 const locationsStore = useLocationStore();
 const { locations, status } = storeToRefs(locationsStore);
-
+const mapStore = useMapStore();
 onMounted(() => {
   locationsStore.refresh();
 });

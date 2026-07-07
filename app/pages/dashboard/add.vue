@@ -1,7 +1,7 @@
 <!-- /app/pages/dashboard/add.vue -->
 
 <template>
-  <div class="container max-w-md mx-auto">
+  <div class="container max-w-md mx-auto p-4">
     <div class="my-4">
       <h1 class="text-lg">
         Add Location
@@ -31,18 +31,12 @@
         :error="errors.description"
         :disabled="loading"
       />
-      <FormField
-        name="lat"
-        label="Latitude"
-        :error="errors.lat"
-        :disabled="loading"
-      />
-      <FormField
-        name="long"
-        label="Longitude"
-        :error="errors.long"
-        :disabled="loading"
-      />
+      <p>
+        Drag the <Icon name="tabler:map-pin-filled" class="text-warning" /> marker to your desired location.
+      </p>
+      <p class="text-xs text-gray-400">
+        Current location: {{ formatNumber(controlledValues.lat) }}, {{ formatNumber(controlledValues.long) }}
+      </p>
       <div class="flex justify-end gap-2">
         <button
           :disabled="loading"
@@ -76,16 +70,24 @@ import type { FetchError } from "ofetch";
 
 import { Field, useForm } from "vee-validate";
 
+import { CENTER_USA } from "~/utils/constants";
 import { InsertLocation } from "~/utils/db/schema";
 
+const mapStore = useMapStore();
 const { $csrfFetch } = useNuxtApp();
 const router = useRouter();
 const loading = ref(false);
 const submitted = ref(false);
 const submitError = ref("");
 
-const { handleSubmit, errors, meta, setErrors } = useForm({
-  validationSchema: InsertLocation, // directo, sin toTypedSchema
+const { handleSubmit, errors, meta, setErrors, setFieldValue, controlledValues } = useForm({
+  validationSchema: InsertLocation,
+  initialValues: {
+    name: "",
+    description: "",
+    long: (CENTER_USA as [number, number])[0],
+    lat: (CENTER_USA as [number, number])[1],
+  }, // directo, sin toTypedSchema
 });
 
 const onSubmit = handleSubmit(async (values) => {
@@ -108,11 +110,35 @@ const onSubmit = handleSubmit(async (values) => {
   }
   loading.value = false;
 });
+function formatNumber(value?: number) {
+  if (!value)
+    return 0;
+  return value.toFixed(5);
+}
+
+effect(() => {
+  if (mapStore.addedPoint) {
+    setFieldValue("long", mapStore.addedPoint.long);
+    setFieldValue("lat", mapStore.addedPoint.lat);
+  }
+});
+
+onMounted(() => {
+  mapStore.addedPoint = {
+    id: 1,
+    name: "Added Point",
+    description: "",
+    long: (CENTER_USA as [number, number])[0],
+    lat: (CENTER_USA as [number, number])[1],
+  };
+});
+
 /*
 dirty = when some data has been filled
 when dirty well confirm with the user if he actually wants to loose its changes
 
 */
+
 onBeforeRouteLeave(() => {
   if (!submitted.value && meta.value.dirty) {
     // eslint-disable-next-line no-alert
@@ -121,6 +147,7 @@ onBeforeRouteLeave(() => {
       return false;
     }
   }
+  mapStore.addedPoint = null;
   // this returns in case its not dirty
   return true;
 });
